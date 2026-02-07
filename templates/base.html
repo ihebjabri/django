@@ -1,18 +1,32 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
     <meta charset="utf-8">
-    <title>{% block title %}Authentification{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}CookMaster Pro - Professional Cooking Platform{% endblock %}</title>
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    {% block extra_css %}{% endblock %}
 </head>
 
-<body class="bg-light">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark mb-4">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'recipes' %}">🍽️ Recipe Planner</a>
+            <a class="navbar-brand" href="{% url 'recipes' %}">
+                <i class="bi bi-fire"></i> CookMaster <span class="gradient-text">Pro</span>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -20,56 +34,104 @@
             <div class="collapse navbar-collapse" id="navbarContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" href="{% url 'recipes' %}">Recettes</a>
+                        <a class="nav-link" href="{% url 'recipes' %}">
+                            <i class="bi bi-book"></i> Recipes
+                        </a>
                     </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'planner' %}">
+                            <i class="bi bi-calendar-check"></i> Meal Planner
+                        </a>
+                    </li>
+                    {% endif %}
                 </ul>
 
                 <!-- Search Bar -->
                 <form class="d-flex me-3" role="search" method="get" action="{% url 'recipes' %}">
-                    <input class="form-control me-2" type="search" placeholder="Rechercher..." name="search"
-                        value="{{ search_query }}">
-                    <button class="btn btn-outline-success" type="submit">Chercher</button>
+                    <div class="input-group">
+                        <input class="form-control" type="search" placeholder="Search recipes..." name="search"
+                            value="{{ search_query }}">
+                        <button class="btn btn-light" type="submit">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
                 </form>
 
+                <!-- User Menu -->
                 <div class="d-flex align-items-center">
                     {% if user.is_authenticated %}
                     {% load user_tags %}
                     {% get_user_dashboard_url user as dashboard_url %}
 
-                    <a class="btn btn-sm btn-info me-2 text-white" href="{% url 'planner' %}">📅 Planning</a>
-
                     {% if dashboard_url %}
-                    <a class="btn btn-sm btn-outline-warning me-2" href="{% url dashboard_url %}">Mon Dashboard</a>
+                    <a class="btn btn-light btn-sm me-2" href="{% url dashboard_url %}">
+                        <i class="bi bi-speedometer2"></i> Dashboard
+                    </a>
                     {% endif %}
-                    <span class="navbar-text me-3 text-secondary">👤 {{ user.username }}</span>
-                    <a class="btn btn-outline-danger btn-sm" href="{% url 'logout' %}">Déconnexion</a>
+
+                    <div class="dropdown">
+                        <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-circle"></i> {{ user.username }}
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="{% url dashboard_url %}">
+                                <i class="bi bi-speedometer2"></i> My Dashboard
+                            </a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="{% url 'logout' %}">
+                                <i class="bi bi-box-arrow-right"></i> Logout
+                            </a></li>
+                        </ul>
+                    </div>
                     {% else %}
-                    <a class="btn btn-outline-light btn-sm me-2" href="{% url 'login' %}">Connexion</a>
-                    <a class="btn btn-primary btn-sm" href="{% url 'register' %}">Inscription</a>
+                    <a class="btn btn-light btn-sm me-2" href="{% url 'login' %}">
+                        <i class="bi bi-box-arrow-in-right"></i> Login
+                    </a>
+                    <a class="btn btn-primary btn-sm" href="{% url 'register' %}">
+                        <i class="bi bi-person-plus"></i> Sign Up
+                    </a>
                     {% endif %}
                 </div>
             </div>
         </div>
     </nav>
 
+    <!-- Main Content -->
     <main class="container">
+        <!-- Messages -->
         {% if messages %}
-        <div class="my-2">
+        <div class="my-3 fade-in">
             {% for message in messages %}
-            <div class="alert alert-info" role="alert">
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %} alert-dismissible fade show" role="alert">
+                <i class="bi bi-info-circle-fill me-2"></i>
                 {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
             {% endfor %}
         </div>
         {% endif %}
 
+        <!-- Page Content -->
         {% block content %}{% endblock %}
     </main>
 
-    <!-- Bootstrap JS (optionnel pour la démo) -->
+    <!-- Footer -->
+    <footer class="mt-auto">
+        <div class="container text-center">
+            <p class="mb-0">
+                &copy; 2026 <strong>CookMaster Pro</strong>. Professional Cooking Platform. Made with
+                <i class="bi bi-heart-fill text-danger"></i> by passionate chefs.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+
+    {% block extra_js %}{% endblock %}
 </body>
 
 </html>

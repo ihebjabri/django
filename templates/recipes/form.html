@@ -10,8 +10,12 @@
                 <form method="post">
                     {% csrf_token %}
                     {{ form.as_p }}
-                    <button type="submit" class="btn btn-primary mt-2">Enregistrer</button>
-                    <a href="{% url 'recipes' %}" class="btn btn-secondary mt-2 ms-2">Annuler</a>
+                    <button type="submit" class="btn btn-primary mt-2">
+                        <i class="bi bi-check-circle"></i> Save Recipe
+                    </button>
+                    <a href="{% url 'recipes' %}" class="btn btn-secondary mt-2 ms-2">
+                        <i class="bi bi-x-circle"></i> Cancel
+                    </a>
                 </form>
             </div>
         </div>

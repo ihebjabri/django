@@ -1,18 +1,17 @@
 {% extends 'base.html' %}
 
-{% block title %}Liste des Recettes{% endblock %}
+{% block title %}Recipe Collection - CookMaster Pro{% endblock %}
 
 {% block content %}
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1>📅 Planning de la Semaine</h1>
-        <a href="{% url 'pdf' %}" class="btn btn-success">
-            📄 Exporter en PDF
-        </a>
+        <h1 class="gradient-text"><i class="bi bi-book-fill"></i> Recipe Collection</h1>
     </div>
 
     {% if not recipes %}
-    <div class="alert alert-warning">Aucune recette trouvée.</div>
+    <div class="alert alert-warning">
+        <i class="bi bi-info-circle"></i> No recipes found. Start by creating your first recipe!
+    </div>
     {% else %}
     {% regroup recipes by day as day_list %}
 
@@ -32,7 +31,7 @@
                             <p class="card-text">{{ recipe.description|truncatewords:20 }}</p>
                         </div>
                         <div class="card-footer bg-transparent border-top-0">
-                            <small class="text-muted">Ajouté par {{ recipe.user.username }}</small>
+                            <small class="text-muted">By {{ recipe.user.username }}</small>
                         </div>
                     </div>
                 </div>

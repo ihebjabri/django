@@ -2,7 +2,16 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User, Group
 
-from .models import Recipe
+from .models import Recipe, Category, Rating, CookingStep, RecipeLike
+
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    """Administration for recipe categories"""
+    list_display = ('name', 'slug', 'icon', 'created_at')
+    search_fields = ('name', 'description')
+    prepopulated_fields = {'slug': ('name',)}
+    ordering = ('name',)
 
 
 @admin.register(Recipe)
@@ -10,10 +19,50 @@ class RecipeAdmin(admin.ModelAdmin):
     """
     Administration des recettes dans l'interface Django admin.
     """
-    list_display = ('name', 'day', 'user', 'description')
-    list_filter = ('day', 'user')
-    search_fields = ('name', 'description', 'day')
-    ordering = ('day', 'name')
+    list_display = ('name', 'day', 'user', 'difficulty', 'preparation_time', 'created_at', 'get_rating')
+    list_filter = ('day', 'user', 'difficulty', 'categories')
+    search_fields = ('name', 'description')
+    filter_horizontal = ('categories',)
+    ordering = ('-created_at',)
+    readonly_fields = ('created_at', 'updated_at')
+
+    def get_rating(self, obj):
+        """Display average rating"""
+        avg = obj.average_rating()
+        count = obj.rating_count()
+        if count > 0:
+            return f"{avg:.1f}★ ({count} reviews)"
+        return "No ratings"
+    get_rating.short_description = 'Rating'
+
+
+@admin.register(Rating)
+class RatingAdmin(admin.ModelAdmin):
+    """Administration for recipe ratings"""
+    list_display = ('recipe', 'user', 'score', 'created_at')
+    list_filter = ('score', 'created_at')
+    search_fields = ('recipe__name', 'user__username', 'review')
+    readonly_fields = ('created_at', 'updated_at')
+    ordering = ('-created_at',)
+
+
+@admin.register(CookingStep)
+class CookingStepAdmin(admin.ModelAdmin):
+    """Administration for cooking steps"""
+    list_display = ('recipe', 'step_number', 'title', 'duration_minutes')
+    list_filter = ('recipe',)
+    search_fields = ('recipe__name', 'title', 'instruction')
+    ordering = ('recipe', 'step_number')
+
+
+@admin.register(RecipeLike)
+class RecipeLikeAdmin(admin.ModelAdmin):
+    """Administration for recipe likes"""
+    list_display = ('recipe', 'user', 'created_at')
+    list_filter = ('created_at',)
+    search_fields = ('recipe__name', 'user__username')
+    readonly_fields = ('created_at',)
+    ordering = ('-created_at',)
 
 
 # Personnalisation de l'admin pour les utilisateurs et groupes
