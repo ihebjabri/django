@@ -1,0 +1,808 @@
+/* ====================================
+   CookMaster Pro - Professional Cooking Platform
+   Elegant Purple/Blue Theme
+   ==================================== */
+
+:root {
+    /* Primary Color Palette - Elegant Purple/Blue */
+    --primary-color: #6366f1;        /* Indigo */
+    --primary-dark: #4f46e5;         /* Darker Indigo */
+    --primary-light: #818cf8;        /* Light Indigo */
+    --secondary-color: #8b5cf6;      /* Purple */
+    --secondary-dark: #7c3aed;       /* Darker Purple */
+    --accent-color: #ec4899;         /* Pink accent */
+    --accent-blue: #3b82f6;          /* Blue accent */
+
+    /* Status Colors */
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+    --info-color: #06b6d4;
+
+    /* Neutral Colors */
+    --dark: #1e293b;
+    --gray-dark: #64748b;
+    --gray: #cbd5e1;
+    --gray-light: #f1f5f9;
+    --light: #f8fafc;
+    --white: #ffffff;
+
+    /* Typography */
+    --font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-size-base: 16px;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+
+    /* Border Radius */
+    --border-radius-sm: 0.375rem;
+    --border-radius: 0.5rem;
+    --border-radius-lg: 0.75rem;
+    --border-radius-xl: 1rem;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --shadow-hover: 0 20px 25px -5px rgba(99, 102, 241, 0.2), 0 10px 10px -5px rgba(99, 102, 241, 0.1);
+    --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.3);
+
+    /* Transitions */
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    color: var(--dark);
+    background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* ====================================
+   Navigation - Premium Style
+   ==================================== */
+
+.navbar {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+    box-shadow: var(--shadow-md);
+    padding: 1rem 0;
+    backdrop-filter: blur(10px);
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--white) !important;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.navbar-brand i {
+    font-size: 1.75rem;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.navbar-brand:hover {
+    transform: translateY(-2px);
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255,255,255,0.9);
+    font-weight: var(--font-weight-medium);
+    margin: 0 0.5rem;
+    transition: var(--transition);
+    position: relative;
+}
+
+.navbar-dark .navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    transition: var(--transition);
+    transform: translateX(-50%);
+}
+
+.navbar-dark .navbar-nav .nav-link:hover::after {
+    width: 80%;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+/* ====================================
+   Cards - Premium Design
+   ==================================== */
+
+.card {
+    border: none;
+    border-radius: var(--border-radius-xl);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    overflow: hidden;
+    background: var(--white);
+    position: relative;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-8px);
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card-img-top {
+    height: 220px;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.1);
+}
+
+.card-body {
+    padding: var(--spacing-md);
+}
+
+.card-title {
+    font-weight: var(--font-weight-bold);
+    color: var(--dark);
+    margin-bottom: var(--spacing-sm);
+    font-size: 1.25rem;
+}
+
+.card-text {
+    color: var(--gray-dark);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Recipe Cards */
+.recipe-card {
+    margin-bottom: var(--spacing-md);
+}
+
+.recipe-card .card-img-wrapper {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--gray-light) 0%, var(--light) 100%);
+}
+
+.recipe-card .badge-difficulty {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 0.75rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: var(--border-radius);
+    font-weight: var(--font-weight-semibold);
+    z-index: 10;
+    backdrop-filter: blur(10px);
+}
+
+.recipe-card .recipe-actions {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: flex;
+    gap: 0.5rem;
+    z-index: 10;
+}
+
+.recipe-card .recipe-actions .btn-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.recipe-card .recipe-actions .btn-icon:hover {
+    background: var(--white);
+    transform: scale(1.1);
+    box-shadow: var(--shadow-md);
+}
+
+.recipe-card .recipe-actions .btn-icon.liked {
+    background: var(--accent-color);
+    color: var(--white);
+}
+
+.recipe-card .recipe-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--spacing-sm);
+    padding-top: var(--spacing-sm);
+    border-top: 2px solid var(--gray-light);
+    font-size: 0.85rem;
+    color: var(--gray-dark);
+}
+
+.recipe-card .recipe-meta .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.recipe-card .recipe-meta .meta-item i {
+    color: var(--primary-color);
+}
+
+.recipe-card .nutrition-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    background: var(--light);
+    border-radius: var(--border-radius-sm);
+    font-size: 0.75rem;
+    color: var(--gray-dark);
+}
+
+/* ====================================
+   Badges & Tags - Premium
+   ==================================== */
+
+.badge {
+    padding: 0.45rem 0.9rem;
+    border-radius: var(--border-radius);
+    font-weight: var(--font-weight-semibold);
+    font-size: 0.8rem;
+    letter-spacing: 0.025em;
+}
+
+.badge-easy {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: var(--white);
+}
+
+.badge-medium {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: var(--white);
+}
+
+.badge-hard {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: var(--white);
+}
+
+.badge-category {
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-color) 100%);
+    color: var(--white);
+    margin: 0.25rem;
+}
+
+.badge-premium {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    color: var(--dark);
+}
+
+/* ====================================
+   Buttons - Premium Design
+   ==================================== */
+
+.btn {
+    padding: 0.65rem 1.75rem;
+    border-radius: var(--border-radius);
+    font-weight: var(--font-weight-semibold);
+    transition: var(--transition);
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--secondary-dark) 100%);
+    color: var(--white);
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(135deg, var(--secondary-dark) 0%, var(--primary-dark) 100%);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-accent {
+    background: linear-gradient(135deg, var(--accent-color) 0%, #db2777 100%);
+    color: var(--white);
+}
+
+.btn-light {
+    background: var(--white);
+    color: var(--primary-color);
+    border: 2px solid var(--gray);
+}
+
+.btn-light:hover {
+    background: var(--light);
+    border-color: var(--primary-color);
+    color: var(--primary-dark);
+}
+
+/* ====================================
+   Forms - Professional Style
+   ==================================== */
+
+.form-control, .form-select {
+    border: 2px solid var(--gray);
+    border-radius: var(--border-radius);
+    padding: 0.75rem 1rem;
+    transition: var(--transition);
+    background: var(--white);
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+    background: var(--white);
+}
+
+.form-label {
+    font-weight: var(--font-weight-semibold);
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+/* ====================================
+   Rating Stars - Premium
+   ==================================== */
+
+.rating-stars {
+    display: inline-flex;
+    gap: 0.25rem;
+}
+
+.rating-stars .star {
+    color: #fbbf24;
+    font-size: 1.2rem;
+    transition: var(--transition-fast);
+}
+
+.rating-stars .star.empty {
+    color: var(--gray);
+}
+
+.rating-stars .star:hover {
+    transform: scale(1.2);
+}
+
+.rating-count {
+    color: var(--gray-dark);
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+}
+
+/* ====================================
+   Dashboard Stats - Premium Cards
+   ==================================== */
+
+.stat-card {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    color: var(--white);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-xl);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    transform: rotate(45deg);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: var(--shadow-glow);
+}
+
+.stat-card.stat-secondary {
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--secondary-dark) 100%);
+}
+
+.stat-card.stat-success {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.stat-card.stat-warning {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+}
+
+.stat-card.stat-info {
+    background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+}
+
+.stat-card .stat-value {
+    font-size: 2.75rem;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.stat-card .stat-label {
+    font-size: 1rem;
+    opacity: 0.95;
+    position: relative;
+    z-index: 1;
+    font-weight: var(--font-weight-medium);
+}
+
+.stat-card .stat-icon {
+    font-size: 3rem;
+    opacity: 0.15;
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* ====================================
+   Nutrition Info Display
+   ==================================== */
+
+.nutrition-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--light);
+    border-radius: var(--border-radius);
+    margin: 1rem 0;
+}
+
+.nutrition-item {
+    text-align: center;
+    padding: 0.75rem;
+    background: var(--white);
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-sm);
+}
+
+.nutrition-item-value {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--primary-color);
+}
+
+.nutrition-item-label {
+    font-size: 0.85rem;
+    color: var(--gray-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ====================================
+   Cooking Steps - Interactive
+   ==================================== */
+
+.cooking-steps {
+    margin: 2rem 0;
+}
+
+.cooking-step {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    background: var(--white);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    border-left: 4px solid var(--primary-color);
+}
+
+.cooking-step:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateX(5px);
+}
+
+.cooking-step.completed {
+    opacity: 0.7;
+    border-left-color: var(--success-color);
+}
+
+.step-number {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--font-weight-bold);
+    font-size: 1.25rem;
+}
+
+.step-content h4 {
+    font-size: 1.1rem;
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: 0.5rem;
+    color: var(--dark);
+}
+
+.step-timer {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    background: var(--light);
+    border-radius: var(--border-radius-sm);
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    margin-top: 0.5rem;
+}
+
+/* ====================================
+   Social Features
+   ==================================== */
+
+.social-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--light);
+    border: 2px solid var(--gray);
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    cursor: pointer;
+    font-weight: var(--font-weight-medium);
+}
+
+.social-btn:hover {
+    background: var(--white);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.social-btn.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--white);
+}
+
+.social-btn.liked {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--white);
+}
+
+/* ====================================
+   Alert Messages - Premium
+   ==================================== */
+
+.alert {
+    border-radius: var(--border-radius-lg);
+    border: none;
+    padding: 1rem 1.5rem;
+    box-shadow: var(--shadow-sm);
+    border-left: 4px solid;
+}
+
+.alert-success {
+    background-color: #d1fae5;
+    color: #065f46;
+    border-left-color: #10b981;
+}
+
+.alert-info {
+    background-color: #cffafe;
+    color: #155e75;
+    border-left-color: #06b6d4;
+}
+
+.alert-warning {
+    background-color: #fef3c7;
+    color: #92400e;
+    border-left-color: #f59e0b;
+}
+
+.alert-danger {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border-left-color: #ef4444;
+}
+
+/* ====================================
+   Footer - Premium
+   ==================================== */
+
+footer {
+    background: linear-gradient(135deg, var(--dark) 0%, #0f172a 100%);
+    color: var(--gray);
+    padding: var(--spacing-lg) 0;
+    margin-top: var(--spacing-xl);
+}
+
+footer a {
+    color: var(--primary-light);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+footer a:hover {
+    color: var(--white);
+}
+
+/* ====================================
+   Animations
+   ==================================== */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide-in {
+    animation: slideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ====================================
+   Responsive Design
+   ==================================== */
+
+@media (max-width: 768px) {
+    .card-img-top {
+        height: 180px;
+    }
+
+    .stat-card .stat-value {
+        font-size: 2rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.25rem;
+    }
+
+    .cooking-step {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nutrition-info {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ====================================
+   Utility Classes
+   ==================================== */
+
+.gradient-text {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.glass-effect {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
