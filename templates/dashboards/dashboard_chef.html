@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard Chef{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col d-flex justify-content-between align-items-center">
+        <div>
+            <h2 class="mb-0">Dashboard Chef</h2>
+            <p class="text-muted">Gestion des recettes</p>
+        </div>
+        <a href="{% url 'create_recipe' %}" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Créer une recette
+        </a>
+    </div>
+</div>
+
+<!-- Statistiques -->
+<div class="row mb-4">
+    <div class="col-md-6 mb-3">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <h5 class="card-title">Mes recettes</h5>
+                <h2 class="mb-0">{{ total_recipes }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-3">
+        <div class="card bg-info text-white">
+            <div class="card-body">
+                <h5 class="card-title">Actions disponibles</h5>
+                <p class="mb-0">Créer, modifier et supprimer des recettes</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Mes recettes -->
+<div class="row mb-4">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Mes recettes</h5>
+            </div>
+            <div class="card-body">
+                {% if user_recipes %}
+                    <div class="row">
+                        {% for recipe in user_recipes %}
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ recipe.name }}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">{{ recipe.day }}</h6>
+                                    <p class="card-text">{{ recipe.description }}</p>
+                                    <div class="d-flex gap-2">
+                                        <a href="{% url 'update_recipe' recipe.id %}" class="btn btn-outline-primary btn-sm">
+                                            Modifier
+                                        </a>
+                                        <a href="{% url 'delete_recipe' recipe.id %}" class="btn btn-outline-danger btn-sm">
+                                            Supprimer
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-muted">Vous n'avez pas encore créé de recette.</p>
+                    <a href="{% url 'create_recipe' %}" class="btn btn-success">Créer ma première recette</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Toutes les recettes (aperçu) -->
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Toutes les recettes</h5>
+            </div>
+            <div class="card-body">
+                {% if all_recipes %}
+                    <div class="row">
+                        {% for recipe in all_recipes %}
+                        <div class="col-md-6 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h6 class="card-title">{{ recipe.name }}</h6>
+                                    <p class="card-text small text-muted">{{ recipe.day }} - {{ recipe.description }}</p>
+                                    <p class="card-text small">
+                                        <strong>Créée par:</strong> {{ recipe.user.username|default:"Inconnu" }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="text-center mt-3">
+                        <a href="{% url 'recipes' %}" class="btn btn-outline-secondary">Voir toutes les recettes</a>
+                    </div>
+                {% else %}
+                    <p class="text-muted">Aucune recette dans l'application.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

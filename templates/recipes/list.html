@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Liste des Recettes{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>📅 Planning de la Semaine</h1>
+        <a href="{% url 'pdf' %}" class="btn btn-success">
+            📄 Exporter en PDF
+        </a>
+    </div>
+
+    {% if not recipes %}
+    <div class="alert alert-warning">Aucune recette trouvée.</div>
+    {% else %}
+    {% regroup recipes by day as day_list %}
+
+    <div class="row">
+        {% for day in day_list %}
+        <div class="col-12 mb-4">
+            <h3 class="border-bottom pb-2 text-primary">{{ day.grouper }}</h3>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for recipe in day.list %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm hover-card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ recipe.name }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                ⏱️ {{ recipe.preparation_time }} min | 👥 {{ recipe.servings }} pers.
+                            </h6>
+                            <p class="card-text">{{ recipe.description|truncatewords:20 }}</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-top-0">
+                            <small class="text-muted">Ajouté par {{ recipe.user.username }}</small>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+
+<style>
+    .hover-card:hover {
+        transform: translateY(-5px);
+        transition: transform 0.2s;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard Utilisateur{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col">
+        <h2 class="mb-0">Dashboard Utilisateur</h2>
+        <p class="text-muted">Consultez les recettes disponibles</p>
+    </div>
+</div>
+
+<!-- Bienvenue -->
+<div class="row mb-4">
+    <div class="col">
+        <div class="alert alert-info" role="alert">
+            <h5 class="alert-heading">Bienvenue {{ user.username }} !</h5>
+            <p class="mb-0">Vous pouvez consulter toutes les recettes disponibles ci-dessous.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Liste des recettes -->
+<div class="row">
+    {% if recipes %}
+        {% for recipe in recipes %}
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ recipe.name }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        <span class="badge bg-primary">{{ recipe.day }}</span>
+                    </h6>
+                    <p class="card-text">{{ recipe.description }}</p>
+                </div>
+                <div class="card-footer text-muted small">
+                    <i class="bi bi-person"></i> Créée par : {{ recipe.user.username|default:"Inconnu" }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="col">
+            <div class="card">
+                <div class="card-body text-center py-5">
+                    <h5 class="text-muted">Aucune recette disponible</h5>
+                    <p class="text-muted">Les recettes apparaîtront ici une fois créées par les chefs.</p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+<!-- Lien vers la vue complète -->
+{% if recipes %}
+<div class="row mt-4">
+    <div class="col text-center">
+        <a href="{% url 'recipes' %}" class="btn btn-outline-secondary">
+            Voir toutes les recettes
+        </a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                {% if user.is_authenticated %}
+                    <h2 class="card-title">Bienvenue, {{ user.username }} 👋</h2>
+                    <p class="card-text mt-2">
+                        Vous êtes connecté. Vous pouvez maintenant gérer vos recettes et générer vos PDFs.
+                    </p>
+                    <a href="{% url 'pdf' %}" class="btn btn-primary me-2">Voir la page PDF</a>
+                    <!-- Boutons fictifs pour illustrer les actions protégées -->
+                    <a href="{% url 'update_recipe' 1 %}" class="btn btn-outline-secondary me-2">Modifier une recette</a>
+                    <a href="{% url 'delete_recipe' 1 %}" class="btn btn-outline-danger">Supprimer une recette</a>
+                    <hr class="my-3">
+                    <a href="{% url 'logout' %}" class="btn btn-link text-danger p-0">Se déconnecter</a>
+                {% else %}
+                    <h2 class="card-title">Bienvenue sur Recipe Planner</h2>
+                    <p class="card-text mt-2">
+                        Vous n'êtes pas connecté. Connectez-vous ou créez un compte pour commencer.
+                    </p>
+                    <a href="{% url 'login' %}" class="btn btn-primary me-2">Log In</a>
+                    <a href="{% url 'register' %}" class="btn btn-success">Sign Up</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
