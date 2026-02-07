@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
-{% block title %}Planning Repas{% endblock %}
+{% block title %}Meal Planner - CookMaster Pro{% endblock %}
 
 {% block content %}
 <div class="row">
     <div class="col-12">
-        <h1 class="mb-4">📅 Planning des Repas</h1>
+        <h1 class="mb-4"><i class="bi bi-calendar-event gradient-text"></i> Meal Planner</h1>
         <div class="card shadow">
             <div class="card-body p-4">
                 <div id='calendar'></div>
@@ -19,7 +19,7 @@
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
-            locale: 'fr',
+            locale: 'en',
             headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',
